@@ -5,10 +5,12 @@
 
 int cvAdd4cMat_q(cv::Mat &dst, cv::Mat &scr, double scale);
 
-int main() {
-    cv::Mat im = cv::imread("file0003.png",-1);
-    cv::Mat im_b = cv::imread("BB.jpeg");
-    if(im.empty()){
+int main(int argc , char **argv) {
+    char * fileName = argv[1];
+    char * bg = argv[2];
+    cv::Mat im = cv::imread(fileName,-1);
+    cv::Mat im_b = cv::imread(bg);
+    if(im.empty() || im_b.empty()){
         std::cout <<  "Could not open or find the image" << std::endl ;
         return -1;
     }
