@@ -7,8 +7,10 @@ void imageScale(const Mat & _input, Mat & _output,double _sx,double _sy){
     double alpha = 0.0, beta = 0.0;
 
     for (int i = 0; i < _output.rows; i++) {
-    uchar* desdata = _output.ptr<uchar>(i);
+        //get the get the row pointer
+        uchar* desdata = _output.ptr<uchar>(i);
         for (int j = 0; j <_output.cols; j++) {
+            //get the integer row of soruce image  coors
             srcrow = int(i / _sx);
             if (srcrow >= _input.rows - 1) {
                 srcrow = _input.rows - 2;
@@ -22,6 +24,7 @@ void imageScale(const Mat & _input, Mat & _output,double _sx,double _sy){
             beta = j / _sy - srccol;
             if (beta >= 1)
                 beta = 1;
+            //calculate
             for (int k = 0; k < 3; k++) {
                 double kk = _input.at<Vec3b>(srcrow, srccol)[k] +
                     beta*(_input.at<Vec3b>(srcrow, srccol + 1)[k] - _input.at<Vec3b>(srcrow, srccol)[k]);
